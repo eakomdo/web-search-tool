@@ -1,7 +1,7 @@
-from app.tools import get_tools, handle_tool_call
+from app.V1.tools import get_tools, handle_tool_call
 
 
-async def handle_list_tools(request: dict) -> dict:
+async def handle_list_tools(_: dict) -> dict:
     return {
         "tools": get_tools()
     }
@@ -21,7 +21,7 @@ async def handle_call_tool(request: dict) -> dict:
                 }
             ]
         }
-    except Exception as e:
+    except (ValueError, KeyError, AttributeError) as e:
         return {
             "content": [
                 {

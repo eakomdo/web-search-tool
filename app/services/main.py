@@ -1,7 +1,7 @@
 import json
 import sys
 import asyncio
-from app.handlers import handle_list_tools, handle_call_tool
+from app.V1.handlers import handle_list_tools, handle_call_tool
 
 
 def handle_message(message: dict) -> dict:
@@ -35,7 +35,7 @@ def main():
             response = handle_message(message)
             print(json.dumps(response))
             sys.stdout.flush()
-        except Exception as e:
+        except (ValueError, KeyError, json.JSONDecodeError) as e:
             print(json.dumps({"error": str(e)}))
             sys.stdout.flush()
 

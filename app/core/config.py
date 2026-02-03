@@ -5,11 +5,11 @@ load_dotenv()
 
 class Config:
     API_KEY = os.getenv("API_KEY", "")
-
+    TAVILY_BASE_URL = os.getenv("TAVILY_BASE_URL", "")
+    TIMEOUT = 10
     
     @staticmethod
     def get_headers():
         return {
-            "Authorization": f"Bearer {Config.API_KEY}",
-            "Accept": "application/json",
+            "Content-Type": "application/json",
         }

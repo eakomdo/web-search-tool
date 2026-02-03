@@ -1,13 +1,10 @@
-import json
-from typing import Any
-
 
 def get_tools() -> list:
     """Define available MCP tools for web search."""
     return [
         {
             "name": "web_search",
-            "description": "Search the web using Brave Search API",
+            "description": "Search the web using Tavily Search API",
             "inputSchema": {
                 "type": "object",
                 "properties": {
@@ -29,14 +26,16 @@ def get_tools() -> list:
 
 def handle_tool_call(tool_name: str, tool_input: dict) -> dict:
     """Handle tool calls from MCP requests."""
-    from services.main import SearchService
+    from app.services.web_search import BraveSearchService
+    from app.schemas.schema import SearchRequest
     
     if tool_name == "web_search":
-        service = SearchService()
-        result = service.search(
+        service = BraveSearchService()
+        search_request = SearchRequest(
             query=tool_input.get("query"),
             count=tool_input.get("count", 10)
         )
+        result = service.search(search_request)
         return result.model_dump()
     
     raise ValueError(f"Unknown tool: {tool_name}")
