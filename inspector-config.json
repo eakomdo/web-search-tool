@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "web-search": {
+      "command": "/home/emma/Desktop/mcp/venv/bin/python",
+      "args": ["-m", "app.services.main"],
+      "env": {
+        "PYTHONPATH": "/home/emma/Desktop/mcp"
+      }
+    }
+  }
+}
