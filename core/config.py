@@ -3,4 +3,13 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-API_KEY = os.getenv("API_KEY")
+class Config:
+    API_KEY = os.getenv("API_KEY", "")
+
+    
+    @staticmethod
+    def get_headers():
+        return {
+            "Authorization": f"Bearer {Config.API_KEY}",
+            "Accept": "application/json",
+        }
